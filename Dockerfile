@@ -2,11 +2,14 @@ FROM ubuntu
 MAINTAINER Michael J. Cohen, mjc@kernel.org
 ENV MUSICBRAINZ_USE_PROXY 1
 RUN apt-get update
-RUN apt-get install -y software-properties-common python-software-properties memcached
-RUN add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && apt-get install postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3
-RUN add-apt-repository -y ppa:chris-lea/redis-server && apt-get update &&
-apt-get install -y redis-server
-RUN apt-get install -qq -y build-essential git-core libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev
+RUN apt-get install -y software-properties-common python-software-properties
+RUN apt-get install -y memcached
+RUN add-apt-repository -y ppa:chris-lea/redis-server
+RUN add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update
+RUN apt-get install -y redis-server
+RUN apt-get install -y postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3
+RUN apt-get install -y build-essential git-core libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev
 RUN echo 'eval $( perl -Mlocal::lib )' >> ~/.bashrc
 RUN git clone --recursive https://github.com/metabrainz/musicbrainz-server.git /opt/musicbrainz-server
 ADD DBDefs.pm /opt/musicbrainz-server/lib/DBDefs.pm
