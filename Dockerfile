@@ -9,7 +9,7 @@ apt-get install -qq -y redis-server
 RUN apt-get install -qq -y build-essential git-core postgresql-server-dev-9.3 postgresql-contrib-9.3  libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev
 RUN echo 'eval $( perl -Mlocal::lib )' >> ~/.bashrc
 RUN git clone --recursive https://github.com/metabrainz/musicbrainz-server.git /opt/musicbrainz-server
-RUN cp /opt/musicbrainz-server/lib/DBDefs.pm.sample /opt/musicbrainz-server/lib/DBDefs.pm
+ADD DBDefs.pm /opt/musicbrainz-server/lib/DBDefs.pm
 RUN cd /opt/musicbrainz-server && cpanm --installdeps --notest .
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-unaccent && make && make install
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-collate && make && make install
