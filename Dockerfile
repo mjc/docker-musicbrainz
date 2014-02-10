@@ -1,11 +1,11 @@
 FROM peer60/postgres
 MAINTAINER Michael J. Cohen, mjc@kernel.org
 ENV MUSICBRAINZ_USE_PROXY 1
-RUN apt-get update -qq
-RUN apt-get install -qq -y software-properties-common
+RUN apt-get update
+RUN apt-get install -y software-properties-common
 RUN memcached
-RUN add-apt-repository -qq -y ppa:chris-lea/redis-server && apt-get update -qq &&
-apt-get install -qq -y redis-server
+RUN add-apt-repository -y ppa:chris-lea/redis-server && apt-get update &&
+apt-get install -y redis-server
 RUN apt-get install -qq -y build-essential git-core postgresql-server-dev-9.3 postgresql-contrib-9.3  libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev
 RUN echo 'eval $( perl -Mlocal::lib )' >> ~/.bashrc
 RUN git clone --recursive https://github.com/metabrainz/musicbrainz-server.git /opt/musicbrainz-server
