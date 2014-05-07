@@ -16,10 +16,10 @@ ADD bashrc ~/.bashrc
 RUN git clone --recursive https://github.com/metabrainz/musicbrainz-server.git /opt/musicbrainz-server
 ADD DBDefs.pm /opt/musicbrainz-server/lib/DBDefs.pm
 ADD cpanm.sh /opt/musicbrainz-server/cpanm.sh
-RUN cd /opt/musicbrainz-server && cpanm --installdeps --notest .
+RUN cd /opt/musicbrainz-server && bash ./cpanm.sh
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-unaccent && make && make install
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-collate && make && make install
 ADD fetch_fullexport.sh /tmp/fetch_fullexport.sh
-RUN /tmp/fetch_fullexport.sh
+RUN bash /tmp/fetch_fullexport.sh
 RUN cd /opt/musicbrainz-server && ./admin/InitDb.pl --createdb --clean
 RUN cd /opt/musicbrainz-server && ./admin/InitDb.pl --createdb --import /tmp/dumps/mbdump*.tar.bz2 --echo
