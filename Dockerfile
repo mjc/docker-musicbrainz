@@ -19,6 +19,7 @@ ADD cpanm.sh /opt/musicbrainz-server/cpanm.sh
 RUN cd /opt/musicbrainz-server && cpanm --installdeps --notest .
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-unaccent && make && make install
 RUN cd /opt/musicbrainz-server/postgresql-musicbrainz-collate && make && make install
-RUN mkdir /tmp/dumps; pushd /tmp/dumps; wget ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/20140208-002339/mbdump.tar.bz2; wget ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/20140208-002339/mbdump-editor.tar.bz2; wget ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/20140208-002339/mbdump-derived.tar.bz2; wget ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/20140208-002339/MD5SUMS; md5sum -c MD5SUMS
+ADD fetch_fullexport.sh /tmp/fetch_fullexport.sh
+RUN /tmp/fetch_fullexport.sh
 RUN cd /opt/musicbrainz-server && ./admin/InitDb.pl --createdb --clean
 RUN cd /opt/musicbrainz-server && ./admin/InitDb.pl --createdb --import /tmp/dumps/mbdump*.tar.bz2 --echo
