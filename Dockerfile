@@ -11,7 +11,7 @@ RUN apt-add-repository 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgd
 RUN apt-get update
 RUN apt-get install -y redis-server
 RUN apt-get install -y postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3
-RUN apt-get install -y build-essential git-core libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev
+RUN apt-get install -y build-essential git-core libxml2-dev libpq-dev libexpat1-dev libdb-dev memcached liblocal-lib-perl cpanminus libicu-dev wget
 ADD bashrc ~/.bashrc
 RUN git clone --recursive https://github.com/metabrainz/musicbrainz-server.git /opt/musicbrainz-server
 ADD DBDefs.pm /opt/musicbrainz-server/lib/DBDefs.pm

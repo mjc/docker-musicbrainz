@@ -1,3 +1,4 @@
+#!/bin/bash
 export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/root/perl5";
 export PERL_MB_OPT="--install_base /root/perl5";
 export PERL_MM_OPT="INSTALL_BASE=/root/perl5";
